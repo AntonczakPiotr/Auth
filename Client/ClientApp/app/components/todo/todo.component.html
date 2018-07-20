@@ -1,0 +1,43 @@
+﻿<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h1 class="h1-responsive">Todo List:</h1>
+        </div>
+    </div>
+    <div class="row mt-5 ">
+        <div class="col-md-3 offset-md-2 left-column mb-1">
+            <ul class="list-group">
+                <li *ngFor="let todo of toDos" class="list-group-item d-flex justify-content-between align-items-center" (click)="onSelect(todo)">
+                    <label for="{{todo.id}}" [ngClass]="{'strikethrough' : todo.completed}">{{todo.id}}. {{todo.header}}</label>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <form>
+                        <input type="text" placeholder="Add new todo" id="header" class="form-control" [(ngModel)]="newToDo.header"
+                               (keyup.enter)="addToDo()" name="header">
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 offset-md-2 right-column mb-1">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <label for="{{selectedToDo.id}}">{{selectedToDo.header}}</label>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <form>
+                        <input placeholder="Description" name="description" [(ngModel)]="selectedToDo.description" class="form-control" type="text" />
+                        <input type="checkbox" [checked]="newToDo.completed" id="completed"
+                               name="completed" [(ngModel)]="selectedToDo.completed" value="Completed" />
+                        <label for="completed">Completed</label>
+                        <button type="button" aria-label="Close" style="float: right;" class="btn btn-primary" (click)="removeTodo(selectedToDo)">
+                            <span aria-hidden="true">Remove</span>
+                        </button>
+                        <button type="button" aria-label="Update" style="float: right;" class="btn btn-primary" (click)="update(selectedToDo)">
+                            <span aria-hidden="true">Update</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
